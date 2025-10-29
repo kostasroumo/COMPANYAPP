@@ -1,15 +1,17 @@
-export type Activity = { title: string; slug: string; description?: string };
-
-export const ACTIVITIES: Activity[] = [
-  { title: "Α΄ ΦΑΣΗ", slug: "phase-a" },
+export const activities = [
+  { title: "Α' ΦΑΣΗ", slug: "a-phase" },
+  { title: "UFBB", slug: "ufbb" },
   { title: "FTTH", slug: "ftth" },
-  { title: "CONCOLIDATION", slug: "concolidation" },
-  { title: "METRO EFERNET", slug: "metro-efernet" },
-  { title: "UFBB", slug: "ufbb", description: "Ultra-Fast Broadband" },
   { title: "NOVA", slug: "nova" },
   { title: "VODAFONE", slug: "vodafone" },
+  { title: "CONSOLIDATION", slug: "consolidation" },
+  { title: "METRO EFRENET", slug: "metro-efrenet" },
   { title: "GAS-TERCOM", slug: "gas-tercom" },
   { title: "FIBER GRID", slug: "fiber-grid" },
   { title: "UNITED FIBER", slug: "united-fiber" },
-  { title: "TAP", slug: "tap" }
+  { title: "TAP", slug: "tap" },
 ];
+
+export function getActivityBySlug(slug: string) {
+  return activities.find(a => a.slug === slug);
+}
