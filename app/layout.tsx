@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { ReactNode } from "react";
 
 export const metadata = {
