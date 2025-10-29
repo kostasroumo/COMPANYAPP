@@ -1,17 +1,29 @@
 import SectionGrid from "@/components/SectionGrid";
+import ActivityCard from "@/components/ActivityCard";
 
-export default function HomePage() {
+export default function Page() {
   return (
-    <main style={{ minHeight: "100vh", background: "#0b0f14", color: "#e6edf3" }}>
-      <header style={{ padding: "18px 24px", borderBottom: "1px solid #1f2937", background: "#111827", position: "sticky", top: 0 }}>
-        <h1 style={{ margin: 0 }}>Δραστηριότητες / Συμβάσεις</h1>
-        <div style={{ opacity: 0.8, fontSize: ".95rem" }}>
-          Επιλέξτε ενότητα (βήματα, υλικά, φωτογραφίες).
-        </div>
-      </header>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 24px" }}>
-        <SectionGrid />
-      </div>
+    <main style={{ padding: "24px" }}>
+      <h1 className="section-title">Δραστηριότητες / Συμβάσεις</h1>
+      <p className="subtle">Επιλέξτε ενότητα (βήματα, υλικά, φωτογραφίες).</p>
+
+      <SectionGrid>
+        <ActivityCard
+          title="Α' ΦΑΣΗ"
+          actions={[
+            { href: "/activities/a-phase", label: "Άνοιγμα" },
+            { href: "/activities/a-phase?newTab=1", label: "Νέα καρτέλα", variant: "ghost" },
+          ]}
+        />
+        <ActivityCard
+          title="FTTH"
+          actions={[
+            { href: "/activities/ftth", label: "Άνοιγμα" },
+            { href: "/activities/ftth?newTab=1", label: "Νέα καρτέλα", variant: "ghost" },
+          ]}
+        />
+        {/* …βάλε όλα τα υπόλοιπα tiles (UFBB, NOVA, κ.λπ.) */}
+      </SectionGrid>
     </main>
   );
 }

@@ -1,0 +1,43 @@
+.card{
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-1);
+  transition: transform var(--t-quick) var(--ease),
+              box-shadow var(--t-quick) var(--ease),
+              border-color var(--t-quick) var(--ease);
+}
+.card:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-2);
+  border-color: color-mix(in oklab, var(--outline) 50%, var(--primary) 50%);
+}
+
+.title{
+  font-weight: 700;
+  letter-spacing: .2px;
+  margin-bottom: var(--space-3);
+}
+
+.actions{
+  display:flex; gap: var(--space-2); flex-wrap: wrap;
+}
+
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--outline) 65%);
+  font-weight:600; font-size:12px;
+  transition: transform var(--t-quick) var(--ease),
+              background var(--t-quick) var(--ease),
+              border-color var(--t-quick) var(--ease);
+}
+.chip:hover{ transform: translateY(-1px); }
+
+.ghost{
+  background: rgba(255,255,255,.03);
+  border-color: var(--outline);
+}
