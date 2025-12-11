@@ -1,7 +1,13 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { activities, getActivityBySlug } from "@/lib/activities";
 import { loadPublicJson } from "@/lib/loadJson";
-import { getActivityBySlug, activities } from "@/lib/activities";
+import UFBBClient from "./UFBBClient";
+
+// export const dynamic = "force-dynamic";
+// // ή
+// export const revalidate = 0;
+
+
 
 type Params = { params: { slug: string } };
 
@@ -10,18 +16,13 @@ export function generateStaticParams() {
 }
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: Params) {
-  const act = getActivityBySlug(params.slug);
-  return { title: act ? `${act.title} • Δραστηριότητες` : "Δραστηριότητες" };
-}
-
 type UfbbData = {
   title: string;
   sections: {
     name: string;
     types?: string[];
     steps: string[];
-    materials?: string[];
+    materials?: { name: string; unit?: string; trackStock?: boolean }[];
     comments?: string;
   }[];
 };
@@ -30,86 +31,38 @@ export default async function ActivityPage({ params }: Params) {
   const act = getActivityBySlug(params.slug);
   if (!act) notFound();
 
-  // Αν είναι UFBB, φέρε JSON, αλλιώς δείξε τις υποενότητες dummy (όπως πριν)
-  const isUFBB = params.slug === "ufbb";
-  let ufbb: UfbbData | null = null;
-  if (isUFBB) {
-    ufbb = await loadPublicJson<UfbbData>("data/ufbb.json");
+  // Ειδική σελίδα για UFBB: φορτώνει όλα από JSON και τα δίνει στο client component (accordion + checklist + stock + σχόλια)
+  if (params.slug === "ufbb") {
+    const ufbb = await loadPublicJson<UfbbData>("data/ufbb.json");
+    return (
+      <main style={{ padding: 24 }}>
+        <h1 className="section-title">{ufbb.title}</h1>
+        <p className="subtle">Ενέργειες για τη δραστηριότητα.</p>
+        <UFBBClient sections={ufbb.sections} />
+      </main>
+    );
   }
 
+  // Fallback για τα υπόλοιπα slugs — placeholder μέχρι να προσθέσουμε δεδομένα
   return (
-    <main style={{ padding: "24px" }}>
+    <main style={{ padding: 24 }}>
       <h1 className="section-title">{act.title}</h1>
-      <p className="subtle">Ενέργειες για τη δραστηριότητα.</p>
+      <p className="subtle">Δεν έχουν οριστεί ακόμη ενότητες για αυτή τη δραστηριότητα.</p>
 
-      {isUFBB && ufbb ? (
-        <div className="grid" style={{ marginTop: 18 }}>
-          {ufbb.sections.map((s) => (
-            <section key={s.name} className="section">
-              <h3>{s.name}</h3>
-
-              {s.types && s.types.length > 0 && (
-                <div className="meta-row">
-                  {s.types.map((t) => (
-                    <span key={t} className="badge">{t}</span>
-                  ))}
-                </div>
-              )}
-
-              <ul className="checklist">
-                {s.steps.map((step, i) => (
-                  <li key={i}>
-                    <input type="checkbox" aria-label={`Ολοκλήρωση: ${step}`} />
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {s.materials && s.materials.length > 0 && (
-                <div className="meta-row">
-                  {s.materials.map((m) => (
-                    <span key={m} className="badge">{m}</span>
-                  ))}
-                </div>
-              )}
-
-              {s.comments && <p className="subtle">Σχόλια: {s.comments}</p>}
-
-              <div style={{ marginTop: 12 }}>
-                <Link className="chip" href="#">Άνοιγμα</Link>
-                <Link className="chip chip--ghost" href="#">Νέα καρτέλα</Link>
-              </div>
-            </section>
-          ))}
+      <div className="grid" style={{ marginTop: 18 }}>
+        <div className="tile">
+          <div className="tile__title">Βήματα</div>
+          <div className="subtle">Θα προστεθούν σύντομα.</div>
         </div>
-      ) : (
-        // generic cards για άλλα slugs (όπως πριν)
-        <div className="grid" style={{ marginTop: 18 }}>
-          <div className="tile">
-            <div className="tile__title">Βήματα</div>
-            <div className="tile__meta">
-              <Link className="chip" href={`/activities/${act.slug}/steps`}>Άνοιγμα</Link>
-              <Link className="chip chip--ghost" href={`/activities/${act.slug}/steps?newTab=1`}>Νέα καρτέλα</Link>
-            </div>
-          </div>
-
-          <div className="tile">
-            <div className="tile__title">Υλικά</div>
-            <div className="tile__meta">
-              <Link className="chip" href={`/activities/${act.slug}/materials`}>Άνοιγμα</Link>
-              <Link className="chip chip--ghost" href={`/activities/${act.slug}/materials?newTab=1`}>Νέα καρτέλα</Link>
-            </div>
-          </div>
-
-          <div className="tile">
-            <div className="tile__title">Φωτογραφίες</div>
-            <div className="tile__meta">
-              <Link className="chip" href={`/activities/${act.slug}/photos`}>Άνοιγμα</Link>
-              <Link className="chip chip--ghost" href={`/activities/${act.slug}/photos?newTab=1`}>Νέα καρτέλα</Link>
-            </div>
-          </div>
+        <div className="tile">
+          <div className="tile__title">Υλικά</div>
+          <div className="subtle">Θα προστεθούν σύντομα.</div>
         </div>
-      )}
+        <div className="tile">
+          <div className="tile__title">Σχόλια</div>
+          <div className="subtle">Θα προστεθούν σύντομα.</div>
+        </div>
+      </div>
     </main>
   );
 }

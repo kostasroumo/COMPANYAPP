@@ -9,7 +9,12 @@
         "Τοποθέτηση πολυσωληνίου",
         "Επαναφορά διαμορφωμένης / αδιαμόρφωτης επιφάνειας"
       ],
-      "materials": ["Πολυσωλήνιο 4x10", "Πολυσωλήνιο 7x10", "Σύνδεσμοι σωληνίσκων"]
+      "materials": [
+        { "name": "Πολυσωλήνιο 4x10", "unit": "", "trackStock": true },
+        { "name": "Πολυσωλήνιο 7x10", "unit": "", "trackStock": true },
+        { "name": "Σύνδεσμοι σωληνίσκων", "unit": "", "trackStock": true },
+        { "name": "Σιδηροκασσέτα", "unit": "", "trackStock": true }
+      ]
     },
     {
       "name": "Εμπλουτισμός",
@@ -18,7 +23,12 @@
         "Τοποθέτηση πολυσωληνίου",
         "Αποκατάσταση διαμορφωμένης / αδιαμόρφωτης επιφάνειας"
       ],
-      "materials": ["Πολυσωλήνιο 4x10", "Πολυσωλήνιο 7x10", "Σύνδεσμοι σωληνίσκων", "Ταινία σήμανσης"]
+      "materials": [
+        { "name": "Πολυσωλήνιο 4x10", "unit": "", "trackStock": true },
+        { "name": "Πολυσωλήνιο 7x10", "unit": "", "trackStock": true },
+        { "name": "Σύνδεσμοι σωληνίσκων", "unit": "" , "trackStock": true },
+        { "name": "Ταινία σήμανσης", "unit": "" , "trackStock": true  }
+      ]
     },
     {
       "name": "Φρεάτια",
@@ -29,7 +39,7 @@
         "Ξεκαλούπωμα",
         "Τοποθέτηση καλύμματος φρεατίου"
       ],
-      "materials": ["Κάλυμμα φρεατίου"],
+      "materials": [{ "name": "Κάλυμμα φρεατίου", "unit": "", "trackStock": true }],
       "comments": "Ονομασία φρεατίου"
     },
     {
@@ -42,26 +52,113 @@
         "Τοποθέτηση καμπίνας / εγκατάσταση πολυσωληνίου & γείωσης",
         "Κατασκευή βάσης και τοποθέτηση κιβωτίου υπαίθριου κατανεμητή (KV)"
       ],
-      "materials": ["Καμπίνα F1", "Καμπίνα F2", "Καμπίνα C3 ηλεκτροδοτούμενη", "Πολυσωλήνιο"],
+      "materials": [
+        { "name": "Καμπίνα F1", "unit": "", "trackStock": true },
+        { "name": "Καμπίνα F2", "unit": "" , "trackStock": true },
+        { "name": "Καμπίνα C3 ηλεκτροδοτούμενη", "unit": "" , "trackStock": true },
+        { "name": "Πολυσωλήνιο", "unit": "", "trackStock": true }
+      ],
       "comments": "Ονομασία καμπίνας"
     },
     {
       "name": "Στύλοι",
+      "steps": ["Τοποθέτηση στύλου", "Αφαίρεση στύλου", "Τοποθέτηση σιδηροσωλήνα"],
+      "materials": [
+        { "name": "Ξύλινος 7.0 m", "unit": "m" , "trackStock": true  },
+        { "name": "Ξύλινος 8. m ", "unit": "m"  , "trackStock": true },
+        { "name": "Πλαστικός  7.0 m", "unit": "m" , "trackStock": true  },
+        { "name": "Πλαστικός 8.0 m", "unit": "m" , "trackStock": true  },
+        { "name": "'Ύψους  7.0 m", "unit": "m" , "trackStock": true  },
+        { "name": "'Ύψους  8.0 m", "unit": "m" , "trackStock": true  },
+        { "name": "Σιδηροσωλήνας", "unit": "", "trackStock": true }
+      ]
+    },  
+    {
+      "name": "Spans (εναέρια)",
+      "steps": ["Τοποθέτηση εναέριων καλωδίων"],
+      "materials": [
+        { "name": "12 O.I. aerial", "unit": "", "trackStock": true },
+        { "name": "24 O.I. aerial", "unit": "", "trackStock": true },
+        { "name": "48 O.I. aerial", "unit": "", "trackStock": true },
+        { "name": "60 O.I. aerial", "unit": "", "trackStock": true },
+        { "name": "72 O.I. aerial", "unit": "", "trackStock": true },
+        { "name": "Στεφάνι στύλου", "unit": "" , "trackStock": true },
+        { "name": "Σταυροί", "unit": "" },
+        { "name": "Πιαστράκια", "unit": "" }
+      ]
+    },
+    {
+      "name": "Εμφύσηση access",
+      "steps": ["Τοποθέτηση Κ.Ο.Ι. σε πολυσωλήνιο", "Λάκκος διερεύνησης με εξυγίανση"],
+      "materials": [
+        { "name": "4 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "12 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "24 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "48 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "96 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "Σύνδεσμοι σωληνίσκων", "unit": "", "trackStock": true }
+      ],
+      "comments": "dpsl/μέτρα"
+    },
+    {
+      "name": "Εμφύσηση backhaul",
+      "steps": ["Τοποθέτηση Κ.Ο.Ι.", "Λάκκος διερεύνησης με εξυγίανση"],
+      "materials": [
+        { "name": "4 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "12 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "24 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "48 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "96 O.I. Mini", "unit": "", "trackStock": true },
+        { "name": "Σύνδεσμοι σωληνίσκων", "unit": "", "trackStock": true }
+      ],
+      "comments": "Ονομασία απόστασης/μέτρα"
+    },
+    {
+      "name": "Οπτικοί σύνδεσμοι εντός φρεατίου",
+      "types": ["Access", "Backhaul"],
+      "steps": ["Εργασίες συγκολλήσεων"],
+      "materials": [{ "name": "Οπτικός σύνδεσμος", "unit": "τεμ" }],
+      "comments": "Ονομασία συνδέσμου"
+    },
+    {
+      "name": "DPSL/οπτικός σύνδεσμος επί στύλου/εναέρια καμπίνα",
+      "types": ["Dpsl B2", "Dpsl B3", "Dpsl B4", "Οπτικός σύνδεσμος"],
       "steps": [
-        "Τοποθέτηση στύλου",
-        "Αφαίρεση στύλου",
-        "Τοποθέτηση σιδηροσωλήνα"
+        "Τοποθέτηση επί στύλου ή τοίχου",
+        "Εργασίες συγκολλήσεων",
+        "Τοποθέτηση σιδηροσωλήνα (ανάρτηση επί τοίχου)"
       ],
       "materials": [
-        "Ξύλινος 7,0μ.",
-        "Ξύλινος 8,0μ.",
-        "Ξύλινος 10,0μ.",
-        "Πλαστικός 8,0μ.",
-        "Μεταλλικός 7,0μ.",
-        "Ξύλινος 9,0μ.",
-        "Ξύλινος 10,0μ.",
-        "Σιδηροσωλήνας"
+        { "name": "Dpsl B2", "unit": "" },
+        { "name": "Dpsl B3", "unit": "" },
+        { "name": "Dpsl B4", "unit": "" },
+        { "name": "Οπτικός σύνδεσμος", "unit": "" },
+        { "name": "Σιδηροσωλήνας", "unit": "", "trackStock": true }
+      ],
+      "comments": "Ονομασία dpsl, οπτικού συνδέσμου, εναέριας καμπίνας"
+    },
+    {
+      "name": "Εργασίες εντός καμπίνας",
+      "steps": ["Τερματισμός Κ.Ο.Ι. διανομής", "Τοποθέτηση υποσυστημάτων (subracks) & κολλήσεις", "Splitters"],
+      "materials": [
+        { "name": "Subracks", "unit": "" },
+        { "name": "Πλάτα subrack", "unit": "" },
+        { "name": "Splitters", "unit": "" }
       ]
+    },
+    {
+      "name": "Τερματισμός Κ.Ο.Ι. εντός κτιρίου ΟΤΕ",
+      "steps": [
+        "Τοποθέτηση υποσυστημάτων ODF",
+        "Τοποθέτηση καλωδίου O.I. και τερματισμός του",
+        "Κατασκευή βραδύκαυστου Κ.Ο.Ι. SET"
+      ],
+      "materials": [
+        { "name": "Subrack", "unit": "" },
+        { "name": "Βραδύκαυστο καλώδιο O.I.", "unit": "", "trackStock": true },
+        { "name": "Οπτικός σύνδεσμος", "unit": "" }
+      ],
+      "comments": "Τοποθεσία"
     }
   ]
 }
