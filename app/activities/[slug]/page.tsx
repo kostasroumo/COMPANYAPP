@@ -2,12 +2,7 @@ import { notFound } from "next/navigation";
 import { activities, getActivityBySlug } from "@/lib/activities";
 import { loadPublicJson } from "@/lib/loadJson";
 import UFBBClient from "./UFBBClient";
-
-// export const dynamic = "force-dynamic";
-// // ή
-// export const revalidate = 0;
-
-
+import ActivityPipeline from "./ActivityPipeline";
 
 type Params = { params: { slug: string } };
 
@@ -31,22 +26,37 @@ export default async function ActivityPage({ params }: Params) {
   const act = getActivityBySlug(params.slug);
   if (!act) notFound();
 
-  // Ειδική σελίδα για UFBB: φορτώνει όλα από JSON και τα δίνει στο client component (accordion + checklist + stock + σχόλια)
+  // Unique key ana drasthriothta/fasi
+  const activityKey = `activity:${params.slug}`;
+
+  // UFBB
   if (params.slug === "ufbb") {
     const ufbb = await loadPublicJson<UfbbData>("data/ufbb.json");
     return (
       <main style={{ padding: 24 }}>
-        <h1 className="section-title">{ufbb.title}</h1>
+        {/* Pipeline panta panw */}
+        <ActivityPipeline storageKey={activityKey} />
+
+        <h1 className="section-title" style={{ marginTop: 18 }}>
+          {ufbb.title}
+        </h1>
         <p className="subtle">Ενέργειες για τη δραστηριότητα.</p>
-        <UFBBClient sections={ufbb.sections} />
+
+        {/* Krataei xwrista state apo to pipeline */}
+        <UFBBClient sections={ufbb.sections} storageKey={`${activityKey}:ufbb`} />
       </main>
     );
   }
 
-  // Fallback για τα υπόλοιπα slugs — placeholder μέχρι να προσθέσουμε δεδομένα
+  // Oles oi alles drasthriothtes (proswrino placeholder)
   return (
     <main style={{ padding: 24 }}>
-      <h1 className="section-title">{act.title}</h1>
+      {/* Pipeline panta panw */}
+      <ActivityPipeline storageKey={activityKey} />
+
+      <h1 className="section-title" style={{ marginTop: 18 }}>
+        {act.title}
+      </h1>
       <p className="subtle">Δεν έχουν οριστεί ακόμη ενότητες για αυτή τη δραστηριότητα.</p>
 
       <div className="grid" style={{ marginTop: 18 }}>
