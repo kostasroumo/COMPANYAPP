@@ -37,6 +37,8 @@ type Assignment = {
 
 type Props = {
   storageKey: string;
+  projectId: string;
+  activity: string;
   onChangeStatus?: (s: JobStatus) => void;
 };
 
@@ -44,7 +46,12 @@ function uid() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-export default function ActivityPipeline({ storageKey, onChangeStatus }: Props) {
+export default function ActivityPipeline({
+  storageKey,
+  projectId,
+  activity,
+  onChangeStatus,
+}: Props) {
   const statusKey = `${storageKey}:status`;
   const assignmentsKey = `${storageKey}:assignments`;
 
@@ -237,9 +244,7 @@ export default function ActivityPipeline({ storageKey, onChangeStatus }: Props) 
                   className="table-lite__row"
                   key={a.id}
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    // εδώ στο επόμενο μέρος θα ανοίξουμε λεπτομέρειες εργασίας
-                  }}
+                  onClick={() => window.open(`/projects/${projectId}/${activity}/assignment/${a.id}`, "_blank")}
                 >
                   <div>{a.workName || "-"}</div>
                   <div>{a.assignedDate || "-"}</div>

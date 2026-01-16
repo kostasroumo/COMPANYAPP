@@ -37,7 +37,11 @@ export default function ProjectActivityPage({ params }: { params: { id: string; 
         {project?.title ?? "Project"} — {meta?.title ?? params.activity.toUpperCase()}
       </h1>
 
-      <ActivityPipeline storageKey={activityKey} />
+      <ActivityPipeline
+        storageKey={activityKey}
+        projectId={params.id}
+        activity={params.activity}
+      />
     </main>
   );
 }
