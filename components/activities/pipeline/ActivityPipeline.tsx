@@ -48,7 +48,9 @@ function uid() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-const HEADER_TO_FIELD: Record<string, keyof Assignment> = {
+type AssignmentField = keyof ReturnType<typeof emptyFields>;
+
+const HEADER_TO_FIELD: Record<string, AssignmentField> = {
   "CUSTOMER NAME": "customerName",
   "CUSTOMER PHONE": "customerPhone",
   "ADDRESS": "address",
