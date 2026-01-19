@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { activities, getActivityBySlug } from "@/lib/activities";
 import { loadPublicJson } from "@/lib/loadJson";
-import UFBBClient from "./UFBBClient";
-import ActivityPipeline from "./ActivityPipeline";
+import UFBBClient from "@/components/activities/ufbb/UFBBClient";
+import ActivityPipeline from "@/components/activities/pipeline/ActivityPipeline";
 
 type Params = { params: { slug: string } };
 
@@ -48,6 +48,25 @@ export default async function ActivityPage({ params }: Params) {
     );
   }
 
+  // FTTH: 2 phases, separate pipelines
+  if (params.slug === "ftth") {
+    const phaseAKey = `${activityKey}:phase-a`;
+    const phaseBKey = `${activityKey}:phase-b`;
+    return (
+      <main style={{ padding: 24 }}>
+        <h1 className="section-title" style={{ marginTop: 0, marginBottom: 12 }}>
+          {act.title}
+        </h1>
+
+        <h2 className="section-title" style={{ marginTop: 8 }}>Α' ΦΑΣΗ</h2>
+        <ActivityPipeline storageKey={phaseAKey} activity="ftth" />
+
+        <h2 className="section-title" style={{ marginTop: 24 }}>Β' ΦΑΣΗ</h2>
+        <ActivityPipeline storageKey={phaseBKey} activity="ftth" />
+      </main>
+    );
+  }
+
   // Oles oi alles drasthriothtes (proswrino placeholder)
   return (
     <main style={{ padding: 24 }}>
@@ -76,3 +95,4 @@ export default async function ActivityPage({ params }: Params) {
     </main>
   );
 }
+

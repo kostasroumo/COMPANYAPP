@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 type Params = { params: { id: string; activity: string; assignId: string } };
 
@@ -10,16 +11,19 @@ export default function AssignmentDetailPage({ params }: Params) {
   const [item, setItem] = useState<any>(null);
   const [title, setTitle] = useState("Assignment");
   const [activeTab, setActiveTab] = useState<TabId>("customer");
+  const searchParams = useSearchParams();
+  const phase = searchParams.get("phase");
 
   useEffect(() => {
-    const key = `project:${params.id}:${params.activity}:assignments`;
+    const phaseSuffix = phase ? `:${phase}` : "";
+    const key = `project:${params.id}:${params.activity}${phaseSuffix}:assignments`;
     const raw = localStorage.getItem(key);
     if (!raw) return;
     try {
       const list = JSON.parse(raw);
       setItem(list.find((x: any) => x.id === params.assignId) || null);
     } catch {}
-  }, [params.id, params.activity, params.assignId]);
+  }, [params.id, params.activity, params.assignId, phase]);
 
   useEffect(() => {
     if (!item) return;

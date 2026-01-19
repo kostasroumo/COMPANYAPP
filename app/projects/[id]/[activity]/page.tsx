@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ActivityPipeline from "@/app/activities/[slug]/ActivityPipeline";
+import ActivityPipeline from "@/components/activities/pipeline/ActivityPipeline";
 import { getActivityBySlug } from "@/lib/activities";
 
 const LS_PROJECTS = "projects:list";
@@ -37,11 +37,30 @@ export default function ProjectActivityPage({ params }: { params: { id: string; 
         {project?.title ?? "Project"} — {meta?.title ?? params.activity.toUpperCase()}
       </h1>
 
-      <ActivityPipeline
-        storageKey={activityKey}
-        projectId={params.id}
-        activity={params.activity}
-      />
+      {params.activity === "ftth" ? (
+        <>
+          <h2 className="section-title" style={{ marginTop: 8 }}>Α' ΦΑΣΗ</h2>
+          <ActivityPipeline
+            storageKey={`${activityKey}:phase-a`}
+            projectId={params.id}
+            activity={params.activity}
+          />
+
+          <h2 className="section-title" style={{ marginTop: 24 }}>Β' ΦΑΣΗ</h2>
+          <ActivityPipeline
+            storageKey={`${activityKey}:phase-b`}
+            projectId={params.id}
+            activity={params.activity}
+          />
+        </>
+      ) : (
+        <ActivityPipeline
+          storageKey={activityKey}
+          projectId={params.id}
+          activity={params.activity}
+        />
+      )}
     </main>
   );
 }
+
